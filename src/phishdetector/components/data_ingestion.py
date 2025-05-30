@@ -31,8 +31,8 @@ class DataIngestion:
             )
 
             logger.info("Exporting train and test datasets to CSV files.")
-            train_df.to_csv(self.config.train_filepath, index=False)
-            test_df.to_csv(self.config.test_filepath, index=False)
+            train_df.to_csv(self.config.ingested_train_filepath, index=False)
+            test_df.to_csv(self.config.ingested_test_filepath, index=False)
             return
         except Exception as e:
             logger.error(f"Error during data splitting")
@@ -47,15 +47,15 @@ class DataIngestion:
         Returns:
             DataIngestionArtifact: An artifact containing the file paths of the train and test datasets.
         """
-        logger.info("Starting data ingestion process.")
+        logger.info("Starting data ingestion process...")
         try:
             raw_df = pd.read_csv(self.config.data_source)
             self.split_data(raw_df)
             logger.info("Data ingestion completed successfully.")
 
             return DataIngestionArtifact(
-                train_filepath=self.config.train_filepath,
-                test_filepath=self.config.test_filepath,
+                ingested_train_filepath=self.config.ingested_train_filepath,
+                ingested_test_filepath=self.config.ingested_test_filepath,
             )
 
         except Exception as e:

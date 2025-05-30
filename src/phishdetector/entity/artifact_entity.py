@@ -4,5 +4,12 @@ from pathlib import Path
 
 @dataclass
 class DataIngestionArtifact:
-    train_filepath: Path
-    test_filepath: Path
+    ingested_train_filepath: Path
+    ingested_test_filepath: Path
+
+
+@dataclass
+class DataValidationArtifact:
+    validation_report_filepath: Path
+    validated_train_filepath: Path
+    validated_test_filepath: Path
