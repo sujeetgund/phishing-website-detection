@@ -6,12 +6,16 @@ class PreprocessingPipelineConfig:
         self.artifacts_dir = Path("artifacts")
         self.models_dir = self.artifacts_dir / "models"
         self.feature_store_dir = self.artifacts_dir / "feature_store"
+        self.preprocessing_report_filepath = (
+            self.artifacts_dir / "reports" / "preprocessing_report.json"
+        )
         self._create_base_dirs()
 
     def _create_base_dirs(self):
         self.artifacts_dir.mkdir(parents=True, exist_ok=True)
         self.models_dir.mkdir(parents=True, exist_ok=True)
         self.feature_store_dir.mkdir(parents=True, exist_ok=True)
+        self.preprocessing_report_filepath.parent.mkdir(parents=True, exist_ok=True)
 
 
 class DataIngestionConfig:
@@ -25,7 +29,7 @@ class DataIngestionConfig:
         self.config = config
         self.data_source = Path("data") / "phishingData.csv"
         self.ingestion_report_filepath = (
-            config.artifacts_dir / "data_ingestion_report.json"
+            config.artifacts_dir / "reports" / "data_ingestion_report.json"
         )
         self.ingested_train_filepath = (
             config.feature_store_dir / "ingested" / "train.csv"
@@ -49,7 +53,7 @@ class DataValidationConfig:
         self.config = config
         self.data_schema_filepath = Path("data") / "schema.yaml"
         self.validation_report_filepath = (
-            config.artifacts_dir / "data_validation_report.yaml"
+            config.artifacts_dir / "reports" / "data_validation_report.yaml"
         )
         self.validated_train_filepath = (
             config.feature_store_dir / "validated" / "validated_train.csv"

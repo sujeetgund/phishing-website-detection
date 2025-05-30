@@ -128,6 +128,14 @@ class DataValidation:
             raise e
 
     def validate_data(self) -> DataValidationArtifact:
+        """Validates the ingested train and test datasets.
+
+        Raises:
+            Exception: If any validation step fails, an exception is raised.
+
+        Returns:
+            DataValidationArtifact: An artifact containing paths to the validated datasets and the validation report.
+        """
         logger.info("Starting data validation process...")
         try:
             # Load the ingested train and test datasets

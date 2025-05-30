@@ -113,7 +113,7 @@ docker run -p 8000:8000 phishdetector
 
 ## 📆 Project Roadmap
 
-* [ ] Dataset ingestion and validation
+* [X] Dataset ingestion and validation
 * [ ] Feature preprocessing and model training
 * [ ] Inference pipeline
 * [ ] API integration
@@ -142,5 +142,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 **Sujeet Gund**
 
-You can contact through [LinkedIn](https://linkedin.com/in/sujeetgund)
+[LinkedIn](https://linkedin.com/in/sujeetgund) • [Email](mailto:sujeetgund@gmail.com) • [X (formerly Twitter)](https://x.com/Sujeet_Gund)
 
