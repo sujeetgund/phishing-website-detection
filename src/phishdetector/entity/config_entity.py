@@ -8,10 +8,10 @@ from sklearn.neighbors import KNeighborsClassifier
 
 
 class PhishDetectorConfig:
+    """Base configuration for the PhishDetector project."""
+
     def __init__(self):
-        """
-        Initializes the PhishDetectorConfig with paths for the main configuration.
-        """
+        """Initializes the PhishDetectorConfig with paths for the main configuration."""
         self.artifacts_dir = Path("artifacts")
         self.feature_store_dir = self.artifacts_dir / "feature_store"
         self.model_dir = self.artifacts_dir / "models"
@@ -91,9 +91,10 @@ class DataValidationConfig:
 
 
 class TrainingPipelineConfig(PhishDetectorConfig):
+    """Configuration for training pipeline in the PhishDetector project."""
+
     def __init__(self):
-        """
-        Initializes the TrainingPipelineConfig with paths for training pipeline."""
+        """Initializes the TrainingPipelineConfig with paths for training pipeline."""
         super().__init__()
         self.training_data_filepath = (
             self.feature_store_dir / "validated" / "validated_train.csv"
@@ -191,3 +192,33 @@ class ModelEvaluationConfig:
         self.evaluation_report_filepath.parent.mkdir(parents=True, exist_ok=True)
         self.trained_model_filepath.parent.mkdir(parents=True, exist_ok=True)
         self.testing_data_filepath.parent.mkdir(parents=True, exist_ok=True)
+
+
+class InferencePipelineConfig(PhishDetectorConfig):
+    """Configuration for inference pipeline in the PhishDetector project."""
+
+    def __init__(self):
+        """Initializes the InferencePipelineConfig with paths for inference pipeline."""
+        super().__init__()
+        self.trained_model_filepath = self.model_dir / "model.pkl"
+
+
+class ModelPredictionConfig:
+    """Configuration for model prediction in the PhishDetector project."""
+
+    def __init__(self, config: InferencePipelineConfig):
+        """
+        Initializes the ModelPredictionConfig with paths for model prediction.
+
+        Args:
+            config (InferencePipelineConfig): An instance of InferencePipelineConfig that contains base directories for models.
+        """
+        self.config = config
+        self.trained_model_filepath = config.trained_model_filepath
+        self.input_data_filepath = Path("data") / "input_data.csv"
+        self.prediction_report_filepath = config.reports_dir / "prediction_report.json"
+        self._create_prediction_dirs()
+
+    def _create_prediction_dirs(self):
+        self.prediction_report_filepath.parent.mkdir(parents=True, exist_ok=True)
+        self.input_data_filepath.parent.mkdir(parents=True, exist_ok=True)

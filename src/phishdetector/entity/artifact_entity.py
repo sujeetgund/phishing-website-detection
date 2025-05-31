@@ -68,3 +68,21 @@ class TrainingPipelineArtifact:
             raise TypeError(
                 "model_evaluation_artifact must be of type ModelEvaluationArtifact"
             )
+
+
+@dataclass
+class ModelPredictionArtifact:
+    predictions: list[int]
+
+
+@dataclass
+class InferencePipelineArtifact:
+    """Artifact for the inference pipeline containing results of model predictions."""
+
+    model_prediction_artifact: ModelPredictionArtifact
+
+    def __post_init__(self):
+        if not isinstance(self.model_prediction_artifact, ModelPredictionArtifact):
+            raise TypeError(
+                "model_prediction_artifact must be of type ModelPredictionArtifact"
+            )
