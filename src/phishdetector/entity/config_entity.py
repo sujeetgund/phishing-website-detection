@@ -6,6 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 
+
 class PhishDetectorConfig:
     def __init__(self):
         """
@@ -103,6 +104,7 @@ class TrainingPipelineConfig(PhishDetectorConfig):
         self.trained_model_filepath = self.model_dir / "model.pkl"
         self.training_report_filepath = self.reports_dir / "training_report.yaml"
         self.evaluation_report_filepath = self.reports_dir / "evaluation_report.yaml"
+        self.target_column = "result"
         self._create_training_dirs()
 
     def _create_training_dirs(self):
@@ -122,7 +124,7 @@ class ModelTrainingConfig:
             config (TrainingPipelineConfig): An instance of TrainingPipelineConfig that contains base directories for models and reports.
         """
         self.config = config
-        self.target_column = "result"
+        self.target_column = config.target_column
         self.training_data_filepath = config.training_data_filepath
         self.trained_model_filepath = config.trained_model_filepath
         self.training_report_filepath = config.training_report_filepath
@@ -168,3 +170,24 @@ class ModelTrainingConfig:
                 "clf__p": [1, 2],  # 1=Manhattan, 2=Euclidean
             },
         ]
+
+
+class ModelEvaluationConfig:
+    def __init__(self, config: TrainingPipelineConfig):
+        """
+        Initializes the ModelEvaluationConfig with paths for model evaluation.
+
+        Args:
+            config (TrainingPipelineConfig): An instance of TrainingPipelineConfig that contains base directories for models and reports.
+        """
+        self.config = config
+        self.target_column = config.target_column
+        self.evaluation_report_filepath = config.evaluation_report_filepath
+        self.trained_model_filepath = config.trained_model_filepath
+        self.testing_data_filepath = config.testing_data_filepath
+        self._create_evaluation_dirs()
+
+    def _create_evaluation_dirs(self):
+        self.evaluation_report_filepath.parent.mkdir(parents=True, exist_ok=True)
+        self.trained_model_filepath.parent.mkdir(parents=True, exist_ok=True)
+        self.testing_data_filepath.parent.mkdir(parents=True, exist_ok=True)

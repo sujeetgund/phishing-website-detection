@@ -1,13 +1,13 @@
 from phishdetector.pipelines.preprocessing import PreprocessingPipeline
-from phishdetector.entity.config_entity import PreprocessingPipelineConfig
-from phishdetector.entity.artifact_entity import PreprocessingPipelineArtifact
-
+from phishdetector.pipelines.training import TrainingPipeline
 from phishdetector.entity.config_entity import (
+    PreprocessingPipelineConfig,
     TrainingPipelineConfig,
-    ModelTrainingConfig,
 )
-from phishdetector.entity.artifact_entity import ModelTrainingArtifact
-from phishdetector.components.model_training import ModelTraining
+from phishdetector.entity.artifact_entity import (
+    PreprocessingPipelineArtifact,
+    TrainingPipelineArtifact,
+)
 
 
 def run_preprocessing(
@@ -26,21 +26,23 @@ def run_preprocessing(
     return preprocessing.run()
 
 
-def run_model_training(config: ModelTrainingConfig) -> ModelTrainingArtifact:
+def run_training(config: TrainingPipelineConfig) -> TrainingPipelineArtifact:
     """
-    Run the model training pipeline with the given configuration.
+    Run the training pipeline with the given configuration.
 
     Args:
-        config (ModelTrainingConfig): Configuration for the model training pipeline.
+        config (TrainingPipelineConfig): Configuration for the training pipeline.
+
+    Returns:
+        TrainingPipelineArtifact: The artifact containing results of the training steps.
     """
-    model_training = ModelTraining(config=config)
-    return model_training.train_model()
+    training = TrainingPipeline(config=config)
+    return training.run()
 
 
 def main():
     run_preprocessing(config=PreprocessingPipelineConfig())
-    training_pipeline_config = TrainingPipelineConfig()
-    run_model_training(config=ModelTrainingConfig(config=training_pipeline_config))
+    run_training(config=TrainingPipelineConfig())
 
 
 if __name__ == "__main__":

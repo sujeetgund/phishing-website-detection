@@ -114,7 +114,7 @@ docker run -p 8000:8000 phishdetector
 ## 📆 Project Roadmap
 
 * [X] Dataset ingestion and validation
-* [ ] Feature preprocessing and model training
+* [X] Feature preprocessing and model training
 * [ ] Inference pipeline
 * [ ] API integration
 * [ ] Add Streamlit frontend for usability
