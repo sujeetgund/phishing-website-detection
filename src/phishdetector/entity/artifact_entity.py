@@ -36,3 +36,9 @@ class PreprocessingPipelineArtifact:
             raise TypeError(
                 "data_validation_artifact must be of type DataValidationArtifact"
             )
+
+@dataclass
+class ModelTrainingArtifact:
+    """Artifact for model training containing paths for the trained model and training report."""
+    trained_model_filepath: Path
+    training_report_filepath: Path

@@ -9,8 +9,6 @@ from sklearn.model_selection import train_test_split
 class DataIngestion:
     def __init__(self, config: DataIngestionConfig):
         """Initializes the DataIngestion component with the provided configuration.
-        This component is responsible for ingesting data from a source, splitting it into training and testing datasets,
-        and saving these datasets to specified file paths.
 
         Args:
             config (DataIngestionConfig): An instance of DataIngestionConfig that contains paths for data ingestion.
@@ -49,7 +47,7 @@ class DataIngestion:
         """
         logger.info("Starting data ingestion process...")
         try:
-            raw_df = pd.read_csv(self.config.data_source)
+            raw_df = pd.read_csv(self.config.data_source_filepath)
             self.split_data(raw_df)
             logger.info("Data ingestion completed successfully.")
 

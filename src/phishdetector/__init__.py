@@ -8,7 +8,7 @@ os.makedirs(os.path.dirname(logs_filepath), exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
     format="[%(asctime)s] : %(levelname)s : %(module)s : %(message)s",
-    handlers=[logging.FileHandler(logs_filepath), logging.StreamHandler()],
+    handlers=[logging.FileHandler(logs_filepath, mode="w"), logging.StreamHandler()],
 )
 
 logger = logging.getLogger(name="phishdetector")
