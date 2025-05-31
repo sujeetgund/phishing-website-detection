@@ -54,7 +54,7 @@ PhishDetector is a machine learning-based web security project that aims to dete
 
 * **Language**: Python 3.10+
 * **Libraries**: pandas, scikit-learn, fastapi
-* **Model**: Decision Tree / Random Forest (can be configured)
+* **Models**: Random Forest, Support Vector Machines, KNeighbours, Logistic Regression, and Ridge
 * **API**: FastAPI
 * **Packaging**: Docker
 
@@ -75,22 +75,10 @@ cd phishing-website-detection
 pip install -r requirements.txt
 ```
 
-### 3. Run Training Pipeline
+### 3. Run API Server
 
 ```bash
-python main.py train
-```
-
-### 4. Run Inference Pipeline
-
-```bash
-python main.py infer --url "http://suspicious-site.com"
-```
-
-### 5. Run API Server
-
-```bash
-uvicorn src.phishdetector.api.v1.endpoints:app --reload
+uvicorn run_api:app
 ```
 
 
@@ -115,14 +103,14 @@ docker run -p 8000:8000 phishdetector
 
 * [X] Dataset ingestion and validation
 * [X] Feature preprocessing and model training
-* [ ] Inference pipeline
-* [ ] API integration
+* [X] Inference pipeline
+* [X] API integration
 * [ ] Add Streamlit frontend for usability
 * [ ] CI/CD integration with GitHub Actions
 
 
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a new branch (`git checkout -b feature-branch`)
@@ -132,15 +120,14 @@ docker run -p 8000:8000 phishdetector
 
 
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 
 
-## Author
-
-**Sujeet Gund**
+## ℹ️ Author
+If you have questions, suggestions, opportunities, or encounter any issues with this repository, feel free to reach out to **Sujeet Gund**.
 
 [LinkedIn](https://linkedin.com/in/sujeetgund) • [Email](mailto:sujeetgund@gmail.com) • [X (formerly Twitter)](https://x.com/Sujeet_Gund)
 

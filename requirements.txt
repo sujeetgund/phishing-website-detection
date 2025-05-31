@@ -6,3 +6,4 @@ pyaml
 ipykernel
 fastapi
 uvicorn
+python-multipart
